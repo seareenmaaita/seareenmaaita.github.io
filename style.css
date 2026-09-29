@@ -1,0 +1,247 @@
+/*
+  Seareen's portfolio: style.css
+  ---------------------------------
+  This file controls how the page LOOKS.
+  Try changing a color or size below, save, and refresh the browser to see what happens.
+*/
+
+/* ===== 1. Design tokens =====
+   "Variables" you can reuse everywhere. Change a color here and it
+   updates across the whole site. */
+:root {
+  --paper:  #F5F6F2;   /* page background, a cool off-white */
+  --ink:    #1D2629;   /* main text */
+  --muted:  #5A686B;   /* secondary text like dates and roles */
+  --rule:   #D5DAD4;   /* thin divider lines */
+  --accent: #5E2A4A;   /* deep plum: links and highlights */
+  --accent-soft: #EFE4EA;
+
+  --font-heading: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+
+  --measure: 42rem;    /* max width of the text column, keeps lines readable */
+}
+
+/* Dark mode: used automatically if the visitor's device is set to dark */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper:  #171C1E;
+    --ink:    #E6E9E5;
+    --muted:  #9AA7A9;
+    --rule:   #2E3638;
+    --accent: #E0A9C6;
+    --accent-soft: #33242D;
+  }
+}
+
+/* ===== 2. Base styles ===== */
+
+/* Makes width calculations include padding and borders (easier to reason about) */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;       /* smooth scrolling when nav links are clicked */
+  scroll-padding-top: 5rem;      /* stops the sticky header from covering section titles */
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;          /* 17px */
+  line-height: 1.6;
+}
+
+/* Turn off smooth scrolling for people who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* A clear outline when someone navigates with the keyboard (accessibility) */
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 0;
+}
+
+/* ===== 3. Navigation bar ===== */
+.site-header {
+  position: sticky;               /* stays at the top while scrolling */
+  top: 0;
+  z-index: 10;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+}
+
+.nav {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;                  /* puts the name and links side by side */
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.nav-name {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.25rem;
+  font-size: 0.95rem;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+/* ===== 4. Main layout ===== */
+main {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ===== 5. Intro (the first thing visitors see) =====
+   This is the one "big" moment on the page: a large name and a short statement. */
+.intro {
+  padding: 5rem 0 3.5rem;
+}
+
+.intro h1 {
+  font-size: clamp(2.75rem, 9vw, 5rem);  /* grows with screen size, within limits */
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+
+.intro-lead {
+  font-size: 1.25rem;
+  line-height: 1.55;
+  max-width: 34rem;
+  margin: 0 0 2rem;
+}
+
+.intro-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+/* The two intro links styled as simple buttons */
+.intro-links a {
+  display: inline-block;
+  padding: 0.6rem 1.1rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.intro-links a:first-child {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+.intro-links a:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* ===== 6. Sections ===== */
+.section {
+  padding: 3rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.section p {
+  margin: 0 0 1rem;
+}
+
+/* ===== 7. Entries (research projects, roles, etc.) =====
+   A thin plum line on the left ties each entry together. */
+.entry {
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--accent-soft);
+  margin-bottom: 2rem;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entry h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.25rem;
+}
+
+.entry-meta {
+  color: var(--muted);
+  font-size: 0.925rem;
+  margin-bottom: 0.5rem !important;
+}
+
+/* ===== 8. Contact ===== */
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+/* ===== 9. Footer ===== */
+.site-footer {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+/* ===== 10. Small screens (phones) ===== */
+@media (max-width: 34rem) {
+  .intro { padding-top: 3rem; }
+  .nav-links { gap: 0.9rem; font-size: 0.9rem; }
+}
